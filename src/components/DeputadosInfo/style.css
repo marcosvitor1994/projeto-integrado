@@ -1,0 +1,14 @@
+.gridContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.alteration {
+  margin-top: 1rem;
+}
+
+.alteration:hover {
+  transform: scale(1.1);
+}
