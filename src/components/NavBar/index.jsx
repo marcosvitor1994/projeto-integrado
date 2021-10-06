@@ -12,16 +12,16 @@ const NavBarComponent = () => {
               Home
             </Link>
             <Link className="nav-link" to="/infos">
-              Saiba mais
+              Deputados AVANTE
             </Link>
             <Link className="nav-link" to="/contato">
               Contato
             </Link>
           </Nav>
+          <Link className="navbar-brand" to="/">
+            Partido AVANTE
+          </Link>
         </Container>
-        <Link className="navbar-brand" to="/">
-          Projeto Integrado
-        </Link>
       </Navbar>
       <br />
     </>
