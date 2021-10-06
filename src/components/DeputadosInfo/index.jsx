@@ -12,9 +12,20 @@ const DeputadosInfo = () => {
   const [responseData, setResponseData] = useState([]);
 
   const [show, setShow] = useState(false);
-  
+  const [deputado, setDeputado] = useState({});
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (id) => {
+    fetch(
+      `https://dadosabertos.camara.leg.br/api/v2/deputados/${id}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.dados);
+        setDeputado(data.dados);
+    });
+    setShow(true)
+    
+  };
 
   useEffect(() => {
     fetch(
@@ -45,7 +56,7 @@ const DeputadosInfo = () => {
                     <hr/> <br/>
                   </Card.Subtitle>
 
-                  <Card.Img key={data.id} className='test' variant="top" src={data.urlFoto} onClick={handleShow} />
+                  <Card.Img key={data.id} className='test' variant="top" src={data.urlFoto} onClick={ () => handleShow(data.id)} />
                   <hr />
                   </Card.Body>
               
@@ -57,19 +68,16 @@ const DeputadosInfo = () => {
         ))}
       </div>
       <Modal show={show} onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>Teste</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" onClick={handleClose}>
-                  Save Changes
-                </Button>
-              </Modal.Footer>
-            </Modal>
+        <Modal.Header closeButton>
+            <Modal.Title>{deputado.nomeCivil}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+           <Modal.Footer>
+              <Button variant="primary" onClick={handleClose}>
+                Saiba Mais
+              </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
